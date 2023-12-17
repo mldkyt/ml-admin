@@ -16,7 +16,7 @@ export default function Home() {
 
     function performLogIn() {
         setValidatingToken(true);
-        fetch("http://localhost:3000/api/validateToken", {
+        fetch("/api/validateToken", {
             method: "POST",
             body: JSON.stringify({token}),
         }).then(x => {
