@@ -17,6 +17,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return;
     }
 
+    if (req.headers["content-type"] !== "application/json") {
+        res.status(400).end();
+        return;
+    }
+
+    if (!req.body.id || !req.body.title || !req.body.paragraphs) {
+        res.status(400).end();
+        return;
+    }
+
     const fetch1 = await fetch(`${process.env.FIREBASE}/articles.json`);
     let json1 = await fetch1.json() as ArticleBase[];
 

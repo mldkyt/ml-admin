@@ -14,7 +14,11 @@ export default function EditSpecific() {
         if (hasRan.current) return;
         hasRan.current = true;
         const id = window.location.href.split("/")[5];
-        fetch(`/api/redirects/get?id=${id}`).then(x => {
+        fetch(`/api/redirects/get?id=${id}`, {
+            headers: {
+                "Authorization": `${localStorage.getItem("token")}`
+            }
+        }).then(x => {
             if (x.status !== 200) {
                 alert("Redirect not found");
                 window.location.href = "/dashboard/redirects";
