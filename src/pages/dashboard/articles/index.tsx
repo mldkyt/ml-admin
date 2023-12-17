@@ -6,7 +6,7 @@ import {ArticleBase} from "@/utils/types";
 import styles from '@/styles/DashboardArticleList.module.scss';
 const inter = Inter({subsets: ['latin']});
 
-export default function Articles() {
+export default function Index() {
 
     const [articles, setArticles] = useState([] as ArticleBase[]);
 

@@ -8,3 +8,9 @@ export type ArticleBase = {
 };
 
 export type ArticleExtended = ArticleBase & { timeOrdering: number };
+
+export type Redirect = {
+    id: string,
+    label: string,
+    url: string
+}

@@ -1,5 +1,5 @@
 import {NextApiRequest, NextApiResponse} from "next";
-import {ArticleBase} from "@/utils/types";
+import {Redirect} from "@/utils/types";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== "POST") {
@@ -22,13 +22,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return;
     }
 
-    if (!req.body.title || !req.body.paragraphs) {
+    if (!req.body.label || !req.body.url) {
         res.status(400).end();
         return;
     }
 
-    const fetch1 = await fetch(`${process.env.FIREBASE}/articles.json`);
-    let json1 = await fetch1.json() as ArticleBase[];
+    const fetch1 = await fetch(`${process.env.FIREBASE}/redirects.json`);
+    let json1 = await fetch1.json() as Redirect[];
     const index = json1.findIndex(article => article.id === req.query.id);
 
     if (index === -1) {
@@ -36,12 +36,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return;
     }
 
-    await fetch(`${process.env.FIREBASE}/articles/${index}.json`, {
+    await fetch(`${process.env.FIREBASE}/redirects/${index}.json`, {
         method: "PUT",
         body: JSON.stringify({
             ...json1.find(x => x.id === req.query.id),
-            title: req.body.title,
-            paragraphs: req.body.paragraphs
+            label: req.body.label,
+            url: req.body.url
         })
     });
 
