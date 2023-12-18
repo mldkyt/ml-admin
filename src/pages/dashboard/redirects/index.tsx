@@ -18,7 +18,11 @@ export default function Index() {
         hasRan.current = true;
 
         (async () => {
-            const res = await fetch('/api/redirects/getAll');
+            const res = await fetch('/api/redirects/getAll', {
+                headers: {
+                    Authorization: `${localStorage.getItem("token")}`
+                }
+            });
             const data = await res.json();
             console.log(data);
             if (data.length === 0) {

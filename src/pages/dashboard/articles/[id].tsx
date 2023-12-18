@@ -39,7 +39,7 @@ export default function EditSpecific() {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `${localStorage.getItem("token")}`
+                Authorization: `${localStorage.getItem("token")}`
             },
             body: JSON.stringify({
                 title: articleTitle,
