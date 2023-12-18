@@ -16,7 +16,7 @@ export default function EditSpecific() {
         const id = window.location.href.split("/")[5];
         fetch(`/api/redirects/get?id=${id}`, {
             headers: {
-                "Authorization": `${localStorage.getItem("token")}`
+                Authorization: `${localStorage.getItem("token")}`
             }
         }).then(x => {
             if (x.status !== 200) {

@@ -11,6 +11,8 @@ export default function DashboardLeftSide() {
             <a href="/dashboard/articles">Article management</a>
             <br />
             <a href="/dashboard/redirects">Redirection management</a>
+            <br />
+            <a href="/dashboard/ideas">Ideas</a>
         </div>
     )
 }
