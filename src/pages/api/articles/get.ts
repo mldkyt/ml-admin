@@ -17,7 +17,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const fetch1 = await fetch(`${process.env.FIREBASE}/articles.json`);
     let json1 = await fetch1.json() as ArticleBase[];
-
+    if (!json1.find(article => article.id === req.query.id)) {
+        res.status(404).end();
+        return;
+    }
 
     res.send({article: json1.find(article => article.id === req.query.id)});
 

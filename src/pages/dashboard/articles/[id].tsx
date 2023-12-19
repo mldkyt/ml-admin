@@ -54,6 +54,28 @@ export default function EditSpecific() {
         });
     }
 
+    function performDelete() {
+        const id = window.location.href.split("/")[5];
+        fetch(`/api/articles/delete`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `${localStorage.getItem("token")}`
+            },
+            body: JSON.stringify({
+                id: id.toString()
+            })
+        }).then(x => {
+            console.log(x);
+            x.text().then(y => console.log(y));
+            if (x.status === 204) {
+                window.location.href = "/dashboard/articles";
+            } else {
+                alert("Error deleting article");
+            }
+        });
+    }
+
     return (
         <main className={`${inter.className}`}>
             <h1>Editing Article</h1>
@@ -69,6 +91,7 @@ export default function EditSpecific() {
             <br />
             <p>Posted on {articlePostDate}</p>
             <button onClick={performSave}>Save</button>
+            <button onClick={performDelete}>Delete</button>
         </main>
     )
 }
