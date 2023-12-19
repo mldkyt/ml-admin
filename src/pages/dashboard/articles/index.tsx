@@ -37,14 +37,14 @@ export default function Index() {
             <DashboardLeftSide/>
             <div>
                 <h1>Article Manager</h1>
+                <a href="/dashboard/articles/new">Create a new article</a>
                 {articles.map((article, i) => (
                     <div key={i} className={styles.article}>
                         <h2>{article.title}</h2>
                         <p>{article.paragraphs[0]}</p>
                         <a href={`/dashboard/articles/${article.id}`}>Edit</a>
                     </div>
-                ))
-                }
+                ))}
             </div>
         </main>
     )

@@ -3,27 +3,22 @@ import {ArticleBase} from "@/utils/types";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== "POST") {
-        res.status(405).end();
-        return;
-    }
-
-    if (!req.query.id) {
-        res.status(400).end();
+        res.status(405).send("Method not allowed");
         return;
     }
 
     if (req.headers.authorization !== process.env.TOKEN) {
-        res.status(401).end();
+        res.status(401).send("Unauthorized");
         return;
     }
 
     if (req.headers["content-type"] !== "application/json") {
-        res.status(400).end();
+        res.status(400).send("Content-Type must be application/json");
         return;
     }
 
     if (!req.body.id || !req.body.title || !req.body.paragraphs) {
-        res.status(400).end();
+        res.status(400).send("ID, title or paragraphs missing");
         return;
     }
 
@@ -44,5 +39,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         })
     });
 
-    res.status(200).end();
+    res.status(204).end();
 }
